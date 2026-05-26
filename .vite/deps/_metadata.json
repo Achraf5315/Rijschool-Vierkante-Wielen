@@ -1,0 +1,31 @@
+{
+  "hash": "dbffe51b",
+  "configHash": "75254284",
+  "lockfileHash": "6b7c3346",
+<<<<<<< HEAD
+  "browserHash": "3be08d33",
+  "optimized": {
+    "alpinejs": {
+      "src": "../../node_modules/alpinejs/dist/module.esm.js",
+      "file": "alpinejs.js",
+      "fileHash": "d56f321c",
+      "needsInterop": false
+    },
+    "axios": {
+      "src": "../../node_modules/axios/index.js",
+      "file": "axios.js",
+      "fileHash": "c1f9615b",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-PZ5AY32C": {
+      "file": "chunk-PZ5AY32C.js"
+    }
+  }
+=======
+  "browserHash": "12c12357",
+  "optimized": {},
+  "chunks": {}
+>>>>>>> 95988ee (github problemen)
+}

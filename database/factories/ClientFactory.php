@@ -1,0 +1,23 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Client;
+use App\Models\Contact;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class ClientFactory extends Factory
+{
+    protected $model = Client::class;
+
+    public function definition(): array
+    {
+        return [
+            'ContactId' => Contact::factory(),
+            'BSN' => fake()->unique()->numerify('#########'),
+            'LicenseCategory' => 'B',
+            'IsActive' => true,
+            'Notes' => fake()->optional()->sentence(),
+        ];
+    }
+}

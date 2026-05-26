@@ -1,0 +1,316 @@
+ /* ---------- KLEUREN & BASIS ---------- */
+        :root {
+            --primary: #0077cc;
+            --accent: #ff7f50;
+            --dark: #1a1a1a;
+            --light: #f7f7f7;
+            --gray: #555;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            color: var(--dark);
+            background: white;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* ---------- HERO ---------- */
+        header {
+            height: 100vh;
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        header::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 20px;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        header h1 {
+            font-size: 3.8em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+
+        /* Zoekbalk */
+        .search-bar {
+            margin-top: 30px;
+            display: flex;
+            background: white;
+            border-radius: 50px;
+            overflow: hidden;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 15px 20px;
+            color: black;
+            border: none;
+            font-size: 1em;
+        }
+
+        .search-bar button {
+            background: var(--accent);
+            border: none;
+            padding: 15px 30px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .search-bar button:hover {
+            background: #ff5722;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ---------- SECTIES ---------- */
+        section {
+            padding: 80px 20px;
+            max-width: 1300px;
+            margin: auto;
+        }
+
+        section h2{
+            text-align: center;
+            font-size: 2.6em;
+            margin-bottom: 50px;
+        }
+
+        /* ---------- USP's ---------- */
+        .usps {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 40px;
+            text-align: center;
+        }
+
+        .usp {
+            flex: 1 1 250px;
+        }
+
+        .usp i {
+            font-size: 3em;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .usp p {
+            font-size: 1.1em;
+            color: var(--gray);
+        }
+
+        /* ---------- BESTEMMINGEN ---------- */
+        .bestemmingen {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .bestemming {
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            height: 260px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .bestemming:hover {
+            transform: scale(1.03);
+        }
+
+        .bestemming img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .bestemming .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.6em;
+            font-weight: bold;
+        }
+
+        /* ---------- REIZEN ---------- */
+        .reizen {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+        }
+
+        .reis {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .reis:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.18);
+        }
+
+        .reis img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .reis-content {
+            padding: 22px;
+        }
+
+        .reis h3 {
+            margin: 0;
+            color: var(--primary);
+            font-size: 1.4em;
+        }
+
+        .reis .type {
+            margin-top: 6px;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        /* ---------- TESTIMONIALS ---------- */
+        .testimonials {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .testimonial {
+            flex: 1 1 300px;
+            background: var(--light);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .testimonial p {
+            font-style: italic;
+        }
+
+        .testimonial .name {
+            margin-top: 15px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        /* ---------- CTA BANNER ---------- */
+        .cta-banner {
+            background: var(--primary);
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+
+        .cta-banner a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 14px 36px;
+            background: var(--accent);
+            border-radius: 6px;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .cta-banner a:hover {
+            background: #ff5722;
+        }
+
+        /* ---------- FOOTER ---------- */
+        footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #0d0d0d 100%);
+            color: white;
+            padding: 80px 20px 40px;
+            margin-top: 80px;
+            border-top: 3px solid var(--accent);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            max-width: 1300px;
+            margin: auto;
+        }
+
+        footer h3 {
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            color: var(--accent);
+        }
+
+        footer ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        footer ul li {
+            margin-bottom: 12px;
+            color: #bbb;
+            transition: 0.3s;
+        }
+
+        footer ul li a {
+            color: #bbb;
+            transition: 0.3s;
+        }
+
+        footer ul li a:hover,
+        footer ul li:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #888;
+            font-size: 0.95em;
+        }
