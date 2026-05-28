@@ -13,10 +13,14 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    //betaling crud
     Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
+    Route::get('/payment/create', [PaymentController::class, 'create'])->name('payment.create');
+    Route::post('/payment', [PaymentController::class, 'store'])->name('payment.store');
+
+    // voor data verbegen
     Route::post('/table-data/toggle', function () {
         session()->put('hide_table_data', ! session('hide_table_data', false));
-
         return back();
     })->name('table-data.toggle');
 });

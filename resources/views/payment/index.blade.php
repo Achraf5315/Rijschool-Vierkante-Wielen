@@ -37,6 +37,10 @@
                                         class="bg-gray-50 px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
                                         Actief
                                     </th>
+                                    <th
+                                        class="bg-gray-50 px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
+                                        Toevoegen
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -88,6 +92,15 @@
                                         <td
                                             class="px-4 py-3 text-sm text-gray-900 border-t border-gray-100 align-middle text-center whitespace-nowrap">
                                             {{ $payment->IsActive ? 'Ja' : 'Nee' }}
+                                        </td>
+                                        <td
+                                            class="px-4 py-3 text-sm text-gray-900 border-t border-gray-100 align-middle text-center whitespace-nowrap">
+                                            <a href="{{ route('payment.create') }}">
+                                                <button
+                                                    class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                                    Toevoegen
+                                                </button>
+                                            </a>
                                         </td>
                                     </tr>
                                 @empty
