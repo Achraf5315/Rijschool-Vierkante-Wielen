@@ -1,15 +1,18 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Betalingen overzicht') }}
-        </h2>
-    </x-slot>
+
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="overflow-x-auto rounded-md">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">Betalingen overzicht</h2>
+                        <a href="{{ route('payment.create') }}">
+                            <button
+                                class="inline-flex items-center px-3 py-1 border border-gray-300 bg-green-400 rounded-md text-sm font-medium text-white hover:bg-green-500 my-4">
+                                Nieuwe betaling toevoegen
+                            </button>
+                        </a>
                         <table class="w-full border border-gray-200 border-separate font-semibold mb-0 align-middle">
                             <thead>
                                 <tr>
@@ -36,10 +39,6 @@
                                     <th
                                         class="bg-gray-50 px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
                                         Actief
-                                    </th>
-                                    <th
-                                        class="bg-gray-50 px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
-                                        Toevoegen
                                     </th>
                                 </tr>
                             </thead>
@@ -92,15 +91,6 @@
                                         <td
                                             class="px-4 py-3 text-sm text-gray-900 border-t border-gray-100 align-middle text-center whitespace-nowrap">
                                             {{ $payment->IsActive ? 'Ja' : 'Nee' }}
-                                        </td>
-                                        <td
-                                            class="px-4 py-3 text-sm text-gray-900 border-t border-gray-100 align-middle text-center whitespace-nowrap">
-                                            <a href="{{ route('payment.create') }}">
-                                                <button
-                                                    class="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">
-                                                    Toevoegen
-                                                </button>
-                                            </a>
                                         </td>
                                     </tr>
                                 @empty
