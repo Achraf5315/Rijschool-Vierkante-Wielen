@@ -15,9 +15,9 @@ class PaymentFactory extends Factory
         return [
             'InvoiceId' => Invoice::factory(),
             'Amount' => fake()->randomFloat(2, 25, 1000),
-            'Method' => fake()->randomElement(['iDEAL', 'CreditCard', 'BankTransfer', 'Cash', 'Tikkie']),
+            'Method' => fake()->randomElement(['iDEAL', 'CreditCard', 'BankTransfer', 'Tikkie']),
             'TransactionRef' => fake()->bothify('TRX-##########'),
-            'Status' => fake()->randomElement(['Pending', 'Completed', 'Failed', 'Refunded']),
+            'Status' => fake()->randomElement(['Ready to send', 'Pending', 'Completed', 'Failed', 'Refunded']),
             'IsActive' => true,
             'Notes' => fake()->optional()->sentence(),
             'PaymentDate' => now(),

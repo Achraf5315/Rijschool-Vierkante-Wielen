@@ -18,7 +18,7 @@ class InvoiceFactory extends Factory
         $vatAmount = round($subtotal * ($vatRate / 100), 2);
 
         return [
-            'InvoiceNumber' => 'INV-' . fake()->unique()->numberBetween(100000, 999999),
+            'InvoiceNumber' => 'FCT-' . fake()->unique()->numberBetween(100000, 999999),
             'ClientId' => Client::factory(),
             'InstructorId' => Instructor::factory(),
             'IssueDate' => now()->toDateString(),
