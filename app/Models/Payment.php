@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Payment extends Model
 {
@@ -24,4 +25,9 @@ class Payment extends Model
     const UPDATED_AT = 'UpdatedAt';
 
     protected $guarded = ['Id'];
+
+    public function GetAllPayments()
+    {
+        return DB::select('CALL sp_GetAllPayments()');
+    }
 }
