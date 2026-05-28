@@ -17,6 +17,10 @@ class PaymentController extends Controller
     {
         $payments = $this->payment->GetAllPayments();
 
+        if (session('hide_table_data', false)) {
+            $payments = [];
+        }
+
         return view('payment.index', compact('payments'));
     }
 }

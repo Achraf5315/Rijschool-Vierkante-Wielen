@@ -15,22 +15,28 @@
                                 <tr>
                                     <th
                                         class="bg-gray-50 px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
-                                        Factuurnummer</th>
+                                        Factuurnummer
+                                    </th>
                                     <th
                                         class="bg-gray-50 px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
-                                        Bedrag</th>
+                                        Bedrag
+                                    </th>
                                     <th
                                         class="bg-gray-50 px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
-                                        Betaalmethode</th>
+                                        Betaalmethode
+                                    </th>
                                     <th
                                         class="bg-gray-50 px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
-                                        Transactie-referentie</th>
+                                        Transactie-referentie
+                                    </th>
                                     <th
                                         class="bg-gray-50 px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
-                                        Status</th>
+                                        Status
+                                    </th>
                                     <th
                                         class="bg-gray-50 px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
-                                        Actief</th>
+                                        Actief
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,7 +48,7 @@
                                         </td>
                                         <td
                                             class="px-4 py-3 text-sm text-gray-900 border-t border-gray-100 align-middle whitespace-nowrap">
-                                            € {{ number_format($payment->Amount, 2) }}</td>
+                                            €{{ number_format($payment->Amount, 2) }}</td>
                                         <td
                                             class="px-4 py-3 text-sm text-gray-900 border-t border-gray-100 align-middle whitespace-nowrap">
                                             {{ $payment->Method }}
@@ -87,8 +93,9 @@
                                 @empty
                                     <tr>
                                         <td colspan="8">
-                                            <div class="bg-amber-50 text-amber-700 text-center p-3">Er zijn geen betalingen
-                                                om te tonen.</div>
+                                            <div class="bg-amber-50 text-amber-700 text-center p-3">
+                                                Er zijn geen betalingen om te tonen.
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforelse

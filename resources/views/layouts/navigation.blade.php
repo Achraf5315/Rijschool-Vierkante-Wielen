@@ -18,6 +18,13 @@
                     <x-nav-link :href="route('payment.index')" :active="request()->routeIs('payment.index')">
                         {{ __('Betalingen') }}
                     </x-nav-link>
+                    <form method="POST" action="{{ route('table-data.toggle') }}" class="inline-flex items-center">
+                        @csrf
+                        <button type="submit"
+                            class="inline-flex items-center rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 hover:text-gray-900">
+                            {{ session('hide_table_data', false) ? __('Toon data') : __('Verberg data') }}
+                        </button>
+                    </form>
                 </div>
             </div>
 
@@ -83,6 +90,14 @@
             </div>
 
             <div class="mt-3 space-y-1">
+                <form method="POST" action="{{ route('table-data.toggle') }}" class="px-4 py-2">
+                    @csrf
+                    <button type="submit"
+                        class="inline-flex w-full items-center justify-center rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 hover:text-gray-900">
+                        {{ session('hide_table_data', false) ? __('Toon data') : __('Verberg data') }}
+                    </button>
+                </form>
+
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>

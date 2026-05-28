@@ -14,6 +14,11 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
+    Route::post('/table-data/toggle', function () {
+        session()->put('hide_table_data', ! session('hide_table_data', false));
+
+        return back();
+    })->name('table-data.toggle');
 });
 
 Route::middleware('auth')->group(function () {
