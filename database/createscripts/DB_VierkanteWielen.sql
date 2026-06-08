@@ -301,3 +301,82 @@ CREATE INDEX idx_payment_invoice      ON Payment(InvoiceId);
 CREATE INDEX idx_notification_user    ON Notification(UserId, IsRead);
 CREATE INDEX idx_user_email           ON User(Email);
 CREATE INDEX idx_contact_user         ON Contact(UserId);
+
+-- ============================================================
+-- STORED PROCEDURES VOOR RIJLESSEN
+-- ============================================================
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS sp_GetAllDrivingLessons$$
+CREATE PROCEDURE sp_GetAllDrivingLessons()
+BEGIN
+    SELECT
+        l.Id,
+        l.ClientId,
+        l.InstructorId,
+        l.VehicleId,
+        l.ClientPackageId,
+        l.StartTime,
+        l.EndTime,
+        l.Location,
+        l.Status,
+        l.IsActive,
+        l.Notes,
+        clientContact.FirstName AS ClientFirstName,
+        clientContact.LastName AS ClientLastName,
+        instructorContact.FirstName AS InstructorFirstName,
+        instructorContact.LastName AS InstructorLastName,
+        v.Brand AS VehicleBrand,
+        v.Model AS VehicleModel,
+        v.LicensePlate AS VehicleLicensePlate
+    FROM Lesson l
+    INNER JOIN Client c ON c.Id = l.ClientId AND c.IsActive = 1
+    INNER JOIN Contact clientContact ON clientContact.Id = c.ContactId AND clientContact.IsActive = 1
+    INNER JOIN Instructor i ON i.Id = l.InstructorId AND i.IsActive = 1
+    INNER JOIN Contact instructorContact ON instructorContact.Id = i.ContactId AND instructorContact.IsActive = 1
+    INNER JOIN Vehicle v ON v.Id = l.VehicleId AND v.IsActive = 1
+    WHERE l.IsActive = 1
+    ORDER BY l.StartTime DESC;
+END$$
+
+DROP PROCEDURE IF EXISTS sp_AddDrivingLesson$$
+CREATE PROCEDURE sp_AddDrivingLesson(
+    IN p_ClientId INT,
+    IN p_InstructorId INT,
+    IN p_VehicleId INT,
+    IN p_StartTime DATETIME,
+    IN p_EndTime DATETIME,
+    IN p_Location VARCHAR(255),
+    IN p_Notes VARCHAR(255)
+)
+BEGIN
+    INSERT INTO Lesson (
+        ClientId,
+        InstructorId,
+        VehicleId,
+        ClientPackageId,
+        StartTime,
+        EndTime,
+        Location,
+        Status,
+        IsActive,
+        Notes
+    )
+    VALUES (
+        p_ClientId,
+        p_InstructorId,
+        p_VehicleId,
+        NULL,
+        p_StartTime,
+        p_EndTime,
+        p_Location,
+        'Planned',
+        1,
+        p_Notes
+    );
+
+    SELECT LAST_INSERT_ID() AS InsertedId;
+END$$
+
+DELIMITER ;

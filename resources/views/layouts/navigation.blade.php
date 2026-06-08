@@ -21,6 +21,12 @@
                             {{ __('Lesrijpakketten beheren') }}
                         </x-nav-link>
                     @endif
+                    @if (Auth::user()->canManagePackages())
+                        <x-nav-link :href="route('driving-lessons.index')"
+                                    :active="request()->routeIs('driving-lessons.*')">
+                            {{ __('Rijlessen beheren') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -81,6 +87,12 @@
                                        :active="request()->routeIs('driving-packages.manage', 'driving-packages.create', 'driving-packages.edit')">
                     {{ __('Lesrijpakketten beheren') }}
                 </x-responsive-nav-link>
+                @endif
+                @if (Auth::user()->canManagePackages())
+                    <x-responsive-nav-link :href="route('driving-lessons.index')"
+                                           :active="request()->routeIs('driving-lessons.*')">
+                        {{ __('Rijlessen beheren') }}
+                    </x-responsive-nav-link>
             @endif
         </div>
 
