@@ -15,7 +15,10 @@ class ClientPackageFactory extends Factory
     {
         return [
             'ClientId' => Client::factory(),
-            'PackageId' => DrivingPackage::factory(),
+            // Hergebruik een bestaand lesrijpakket als die er is (bij seeden), zodat
+            // er geen extra willekeurige pakketten ontstaan. In tests (lege database)
+            // valt het terug op het aanmaken van een pakket.
+            'PackageId' => DrivingPackage::query()->inRandomOrder()->value('Id') ?? DrivingPackage::factory(),
             'LessonsUsed' => fake()->numberBetween(0, 5),
             'IsCompleted' => false,
             'IsActive' => true,

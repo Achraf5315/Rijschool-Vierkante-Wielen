@@ -49,6 +49,15 @@ class User extends Authenticatable
         ];
     }
 
+    /**
+     * Mag deze gebruiker lesrijpakketten beheren (toevoegen/bewerken/verwijderen)?
+     * Dit geldt voor zowel de administrator als de instructeur.
+     */
+    public function canManagePackages(): bool
+    {
+        return in_array(strtolower($this->rolename ?? ''), ['admin', 'instructor'], true);
+    }
+
     public function contact(): HasOne
     {
         return $this->hasOne(Contact::class, 'UserId');

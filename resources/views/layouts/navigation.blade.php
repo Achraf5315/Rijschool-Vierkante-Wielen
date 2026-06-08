@@ -15,6 +15,12 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @if (Auth::user()->canManagePackages())
+                        <x-nav-link :href="route('driving-packages.manage')"
+                                    :active="request()->routeIs('driving-packages.manage', 'driving-packages.create', 'driving-packages.edit')">
+                            {{ __('Lesrijpakketten beheren') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -70,6 +76,12 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @if (Auth::user()->canManagePackages())
+                <x-responsive-nav-link :href="route('driving-packages.manage')"
+                                       :active="request()->routeIs('driving-packages.manage', 'driving-packages.create', 'driving-packages.edit')">
+                    {{ __('Lesrijpakketten beheren') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

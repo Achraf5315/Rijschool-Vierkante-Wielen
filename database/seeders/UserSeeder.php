@@ -9,11 +9,14 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
+        // De demo-accounts worden meteen als geverifieerd aangemaakt, zodat ze
+        // direct toegang hebben tot het dashboard (de 'verified' middleware).
         User::create([
             'name' => 'Admin User',
             'email' => 'admin@rijschool.nl',
             'password' => 'achraf123',
             'rolename' => 'admin',
+            'email_verified_at' => now(),
         ]);
 
         // instructor account
@@ -22,6 +25,7 @@ class UserSeeder extends Seeder
             'email' => 'instructeur@rijschool.nl',
             'password' => 'achraf123',
             'rolename' => 'instructor',
+            'email_verified_at' => now(),
         ]);
 
         // Student account
@@ -30,6 +34,7 @@ class UserSeeder extends Seeder
             'email' => 'leerling@rijschool.nl',
             'password' => 'achraf123',
             'rolename' => 'student',
+            'email_verified_at' => now(),
         ]);
 
         User::factory()->count(5)->create();

@@ -2,11 +2,15 @@
 
 namespace Tests\Feature;
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
+    // De homepagina haalt voorbeeldpakketten uit de database, dus de tabellen
+    // moeten in de testdatabase aanwezig zijn.
+    use RefreshDatabase;
+
     /**
      * A basic test example.
      */
