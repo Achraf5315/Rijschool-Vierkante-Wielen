@@ -38,6 +38,10 @@
                                class="{{ request()->routeIs('driving-packages.*') ? 'text-gray-900 font-medium' : 'text-gray-500 hover:text-gray-800' }}">
                                 Lesrijpakketten
                             </a>
+                            <a href="{{ route('driving-lessons.index') }}"
+                               class="{{ request()->routeIs('driving-lessons.*') ? 'text-gray-900 font-medium' : 'text-gray-500 hover:text-gray-800' }}">
+                                Rijlessen
+                            </a>
                         </div>
                     </div>
 
