@@ -9,13 +9,13 @@ use Database\Seeders\ClientPackageSeeder;
 use Database\Seeders\ClientSeeder;
 use Database\Seeders\ContactSeeder;
 use Database\Seeders\DrivingPackageSeeder;
+use Database\Seeders\DrivingLessonSeeder;
 use Database\Seeders\ExamRequestSeeder;
 use Database\Seeders\InstructorAvailabilitySeeder;
 use Database\Seeders\InstructorSeeder;
 use Database\Seeders\InstructorVehicleSeeder;
 use Database\Seeders\InvoiceLineSeeder;
 use Database\Seeders\InvoiceSeeder;
-use Database\Seeders\LessonSeeder;
 use Database\Seeders\NotificationSeeder;
 use Database\Seeders\PaymentSeeder;
 use Database\Seeders\UserSeeder;
@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
             InstructorVehicleSeeder::class,
             DrivingPackageSeeder::class,
             ClientPackageSeeder::class,
-            LessonSeeder::class,
+            DrivingLessonSeeder::class,
             InvoiceSeeder::class,
             InvoiceLineSeeder::class,
             PaymentSeeder::class,
