@@ -11,7 +11,7 @@ class Instructeur extends Model
     protected $table = 'Instructor';
  
     // Primary key column name
-    protected $primaryKey = 'InstructorID';
+    protected $primaryKey = 'Id';
  
     // Mass-assignable columns
     protected $fillable = [
@@ -23,44 +23,42 @@ class Instructeur extends Model
     // Retrieve all instructors with contact info and their linked vehicle
     public static function GetAllInstructeurs(): array
     {
-        return DB::select("
-            SELECT
-                i.InstructorID,
-                i.LicenseNumber,
-                i.IsActive,
-                c.FirstName,
-                c.LastName,
-                c.Email,
-                c.Phone,
-                v.Brand       AS VehicleBrand,
-                v.Model       AS VehicleModel,
-                v.LicensePlate
-            FROM Instructor i
-            INNER JOIN Contact c ON c.ContactID = i.ContactID
-            LEFT JOIN InstructorVehicle iv ON iv.InstructorID = i.InstructorID
-            LEFT JOIN Vehicle v ON v.VehicleID = iv.VehicleID
-            ORDER BY c.LastName ASC, c.FirstName ASC
-        ");
+return DB::select("
+    SELECT
+        i.Id,
+        i.LicenseNumber,
+        i.IsActive,
+        c.FirstName,
+        c.LastName,
+        c.Phone,
+        v.Brand AS VehicleBrand,
+        v.Model AS VehicleModel,
+        v.LicensePlate
+    FROM Instructor i
+    INNER JOIN Contact c ON c.Id = i.ContactId
+    LEFT JOIN InstructorVehicle iv ON iv.InstructorId = i.Id
+    LEFT JOIN Vehicle v ON v.Id = iv.VehicleId
+    ORDER BY c.LastName ASC, c.FirstName ASC
+");
     }
  
     // Retrieve a single instructor by ID
     public static function GetInstructeurById(int $id): ?object
     {
-        $result = DB::select("
-            SELECT
-                i.InstructorID,
-                i.LicenseNumber,
-                i.IsActive,
-                c.ContactID,
-                c.FirstName,
-                c.LastName,
-                c.Email,
-                c.Phone
-            FROM Instructor i
-            INNER JOIN Contact c ON c.ContactID = i.ContactID
-            WHERE i.InstructorID = ?
-            LIMIT 1
-        ", [$id]);
+$result = DB::select("
+    SELECT
+        i.Id,
+        i.LicenseNumber,
+        i.IsActive,
+        c.Id AS ContactId,
+        c.FirstName,
+        c.LastName,
+        c.Phone
+    FROM Instructor i
+    INNER JOIN Contact c ON c.Id = i.ContactId
+    WHERE i.Id = ?
+    LIMIT 1
+", [$id]);
  
         return $result[0] ?? null;
     }

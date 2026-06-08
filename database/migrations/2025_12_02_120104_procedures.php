@@ -16,6 +16,12 @@ return new class extends Migration
             return;
         }
 
+        DB::statement('DROP PROCEDURE IF EXISTS sp_GetInstructeurById');
+        DB::statement('DROP PROCEDURE IF EXISTS sp_GetAllInstructeurs');
+        DB::statement('DROP PROCEDURE IF EXISTS sp_GetAutoById');
+        DB::statement('DROP PROCEDURE IF EXISTS sp_GetAllAutos');
+        DB::statement('DROP PROCEDURE IF EXISTS sp_AddDrivingLesson');
+        DB::statement('DROP PROCEDURE IF EXISTS sp_GetAllDrivingLessons');
         DB::statement('DROP PROCEDURE IF EXISTS sp_PakBoekingenAantal');
         DB::statement('DROP PROCEDURE IF EXISTS sp_PakAlleFacturen');
         DB::statement('DROP PROCEDURE IF EXISTS sp_MeestVoorkomendReis');
@@ -227,6 +233,102 @@ return new class extends Migration
                 SELECT LAST_INSERT_ID() AS InsertedId;
             END
         ");
+
+        DB::statement('
+            DROP PROCEDURE IF EXISTS sp_GetAllAutos
+        ');
+
+        DB::statement("
+            CREATE PROCEDURE sp_GetAllAutos()
+            BEGIN
+                SELECT
+                    v.Id AS VehicleId,
+                    v.LicensePlate,
+                    v.Brand,
+                    v.Model,
+                    v.Year,
+                    v.IsActive,
+                    CONCAT_WS(' ', c.FirstName, NULLIF(c.LastName, '')) AS InstructorName
+                FROM Vehicle v
+                LEFT JOIN InstructorVehicle iv ON iv.VehicleId = v.Id AND iv.IsActive = 1
+                LEFT JOIN Instructor i ON i.Id = iv.InstructorId AND i.IsActive = 1
+                LEFT JOIN Contact c ON c.Id = i.ContactId
+                WHERE v.IsActive = 1
+                ORDER BY v.Brand ASC, v.Model ASC;
+            END
+        ");
+
+        DB::statement('
+            DROP PROCEDURE IF EXISTS sp_GetAutoById
+        ');
+
+        DB::statement("
+            CREATE PROCEDURE sp_GetAutoById(
+                IN p_VehicleId INT
+            )
+            BEGIN
+                SELECT
+                    v.Id AS VehicleId,
+                    v.LicensePlate,
+                    v.Brand,
+                    v.Model,
+                    v.Year,
+                    v.IsActive
+                FROM Vehicle v
+                WHERE v.Id = p_VehicleId AND v.IsActive = 1
+                LIMIT 1;
+            END
+        ");
+
+        DB::statement('
+            DROP PROCEDURE IF EXISTS sp_GetAllInstructeurs
+        ');
+
+        DB::statement("
+            CREATE PROCEDURE sp_GetAllInstructeurs()
+            BEGIN
+                SELECT
+                    i.Id AS InstructorId,
+                    i.LicenseNumber,
+                    i.IsActive,
+                    c.FirstName,
+                    c.LastName,
+                    c.Phone,
+                    v.Brand AS VehicleBrand,
+                    v.Model AS VehicleModel,
+                    v.LicensePlate
+                FROM Instructor i
+                INNER JOIN Contact c ON c.Id = i.ContactId
+                LEFT JOIN InstructorVehicle iv ON iv.InstructorId = i.Id AND iv.IsActive = 1
+                LEFT JOIN Vehicle v ON v.Id = iv.VehicleId AND v.IsActive = 1
+                WHERE i.IsActive = 1
+                ORDER BY c.LastName ASC, c.FirstName ASC;
+            END
+        ");
+
+        DB::statement('
+            DROP PROCEDURE IF EXISTS sp_GetInstructeurById
+        ');
+
+        DB::statement("
+            CREATE PROCEDURE sp_GetInstructeurById(
+                IN p_InstructorId INT
+            )
+            BEGIN
+                SELECT
+                    i.Id AS InstructorId,
+                    i.LicenseNumber,
+                    i.IsActive,
+                    c.Id AS ContactId,
+                    c.FirstName,
+                    c.LastName,
+                    c.Phone
+                FROM Instructor i
+                INNER JOIN Contact c ON c.Id = i.ContactId
+                WHERE i.Id = p_InstructorId AND i.IsActive = 1
+                LIMIT 1;
+            END
+        ");
     }
 
     /**
@@ -238,6 +340,10 @@ return new class extends Migration
             return;
         }
 
+        DB::statement('DROP PROCEDURE IF EXISTS sp_GetInstructeurById');
+        DB::statement('DROP PROCEDURE IF EXISTS sp_GetAllInstructeurs');
+        DB::statement('DROP PROCEDURE IF EXISTS sp_GetAutoById');
+        DB::statement('DROP PROCEDURE IF EXISTS sp_GetAllAutos');
         DB::statement('DROP PROCEDURE IF EXISTS sp_AddDrivingLesson');
         DB::statement('DROP PROCEDURE IF EXISTS sp_GetAllDrivingLessons');
         DB::statement('DROP PROCEDURE IF EXISTS sp_AnnuleerFactuur');

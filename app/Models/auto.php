@@ -11,8 +11,7 @@ class Auto extends Model
     protected $table = 'Vehicle';
  
     // Primary key column name
-    protected $primaryKey = 'VehicleID';
- 
+    protected $primaryKey = 'Id';
     // Mass-assignable columns
     protected $fillable = [
         'LicensePlate',
@@ -25,21 +24,21 @@ class Auto extends Model
     // Retrieve all vehicles with their linked instructor (if any)
     public static function GetAllAutos(): array
     {
-        return DB::select("
-            SELECT
-                v.VehicleID,
-                v.LicensePlate,
-                v.Brand,
-                v.Model,
-                v.Year,
-                v.IsAvailable,
-                CONCAT(c.FirstName, ' ', c.LastName) AS InstructorName
-            FROM Vehicle v
-            LEFT JOIN InstructorVehicle iv ON iv.VehicleID = v.VehicleID
-            LEFT JOIN Instructor i ON i.InstructorID = iv.InstructorID
-            LEFT JOIN Contact c ON c.ContactID = i.ContactID
-            ORDER BY v.Brand ASC, v.Model ASC
-        ");
+return DB::select("
+    SELECT
+        v.Id,
+        v.LicensePlate,
+        v.Brand,
+        v.Model,
+        v.Year,
+        v.IsActive,
+        CONCAT(c.FirstName, ' ', c.LastName) AS InstructorName
+    FROM Vehicle v
+    LEFT JOIN InstructorVehicle iv ON iv.VehicleId = v.Id
+    LEFT JOIN Instructor i ON i.Id = iv.InstructorId
+    LEFT JOIN Contact c ON c.Id = i.ContactId
+    ORDER BY v.Brand ASC, v.Model ASC
+");
     }
  
     // Retrieve a single vehicle by its ID
@@ -47,14 +46,14 @@ class Auto extends Model
     {
         $result = DB::select("
             SELECT
-                v.VehicleID,
+                v.Id,
                 v.LicensePlate,
                 v.Brand,
                 v.Model,
                 v.Year,
-                v.IsAvailable
+                v.IsActive,
             FROM Vehicle v
-            WHERE v.VehicleID = ?
+            WHERE v.Id = ?
             LIMIT 1
         ", [$id]);
  
@@ -86,8 +85,8 @@ class Auto extends Model
                 Brand        = ?,
                 Model        = ?,
                 Year         = ?,
-                IsAvailable  = ?
-            WHERE VehicleID = ?
+                IsActive     = ?
+            WHERE Id = ?
         ", [
             $data['kenteken'],
             $data['merk'],
@@ -101,7 +100,7 @@ class Auto extends Model
     // Soft-delete by marking unavailable, or hard-delete
     public static function DeleteAuto(int $id): void
     {
-        DB::delete("DELETE FROM Vehicle WHERE VehicleID = ?", [$id]);
+   DB::delete("DELETE FROM Vehicle WHERE Id = ?", [$id]);
     }
 }
  
