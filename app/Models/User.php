@@ -58,6 +58,24 @@ class User extends Authenticatable
         return in_array(strtolower($this->rolename ?? ''), ['admin', 'instructor'], true);
     }
 
+    /**
+     * Mag deze gebruiker auto's beheren?
+     * Dit geldt voor zowel de administrator als de instructeur.
+     */
+    public function canManageAutos(): bool
+    {
+        return in_array(strtolower($this->rolename ?? ''), ['admin', 'instructor'], true);
+    }
+
+    /**
+     * Mag deze gebruiker instructeurs beheren?
+     * Dit geldt ALLEEN voor de administrator.
+     */
+    public function canManageInstructeurs(): bool
+    {
+        return strtolower($this->rolename ?? '') === 'admin';
+    }
+
     public function contact(): HasOne
     {
         return $this->hasOne(Contact::class, 'UserId');

@@ -27,6 +27,18 @@
                             {{ __('Rijlessen beheren') }}
                         </x-nav-link>
                     @endif
+                    @if (Auth::user()->canManageAutos())
+                        <x-nav-link :href="route('autos.index')"
+                                    :active="request()->routeIs('autos.*')">
+                            {{ __('Autos beheren') }}
+                        </x-nav-link>
+                    @endif
+                    @if (Auth::user()->canManageInstructeurs())
+                        <x-nav-link :href="route('instructeurs.index')"
+                                    :active="request()->routeIs('instructeurs.*')">
+                            {{ __('Instructeurs beheren') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -93,8 +105,20 @@
                                            :active="request()->routeIs('driving-lessons.*')">
                         {{ __('Rijlessen beheren') }}
                     </x-responsive-nav-link>
-            @endif
-        </div>
+                @endif
+                @if (Auth::user()->canManageAutos())
+                    <x-responsive-nav-link :href="route('autos.index')"
+                                           :active="request()->routeIs('autos.*')">
+                        {{ __('Autos beheren') }}
+                    </x-responsive-nav-link>
+                @endif
+                @if (Auth::user()->canManageInstructeurs())
+                    <x-responsive-nav-link :href="route('instructeurs.index')"
+                                           :active="request()->routeIs('instructeurs.*')">
+                        {{ __('Instructeurs beheren') }}
+                    </x-responsive-nav-link>
+                @endif
+            </div>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
