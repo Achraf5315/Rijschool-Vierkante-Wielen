@@ -1,5 +1,14 @@
 <x-app-layout>
 
+    @php
+        $paymentStatusLabels = [
+            'Completed' => ['label' => 'Voltooid', 'class' => 'bg-green-100 text-green-800'],
+            'Pending' => ['label' => 'In afwachting', 'class' => 'bg-yellow-100 text-yellow-800'],
+            'Refunded' => ['label' => 'Terugbetaald', 'class' => 'bg-blue-100 text-blue-800'],
+            'Failed' => ['label' => 'Mislukt', 'class' => 'bg-red-100 text-red-800'],
+        ];
+    @endphp
+
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -61,32 +70,16 @@
                                                 class="truncate max-w-[240px] inline-block align-middle">{{ $payment->TransactionRef }}</span>
                                         </td>
                                         <td class="px-4 py-3 text-sm border-t border-gray-100 align-middle">
-                                            @if ($payment->Status === 'Completed')
-                                                <span
-                                                    class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
-                                                    Succesvol
-                                                </span>
-                                            @elseif ($payment->Status === 'Pending')
-                                                <span
-                                                    class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">
-                                                    In afwachting
-                                                </span>
-                                            @elseif ($payment->Status === 'Refunded')
-                                                <span
-                                                    class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
-                                                    Terugbetaald
-                                                </span>
-                                            @elseif ($payment->Status === 'Failed')
-                                                <span
-                                                    class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800">
-                                                    Mislukt
-                                                </span>
-                                            @else
-                                                <span
-                                                    class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">
-                                                    {{ ucfirst($payment->Status) }}
-                                                </span>
-                                            @endif
+                                            @php
+                                                $status = $paymentStatusLabels[$payment->Status] ?? [
+                                                    'label' => $payment->Status,
+                                                    'class' => 'bg-gray-100 text-gray-800',
+                                                ];
+                                            @endphp
+                                            <span
+                                                class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium {{ $status['class'] }}">
+                                                {{ $status['label'] }}
+                                            </span>
                                         </td>
                                         <td
                                             class="px-4 py-3 text-sm text-gray-900 border-t border-gray-100 align-middle text-center whitespace-nowrap">
