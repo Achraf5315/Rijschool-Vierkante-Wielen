@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
 
 class Invoice extends Model
@@ -23,5 +24,23 @@ class Invoice extends Model
 
     const UPDATED_AT = 'UpdatedAt';
 
-    protected $guarded = ['Id'];
+    protected $fillable = [
+        'InvoiceNumber',
+        'ClientId',
+        'InstructorId',
+        'IssueDate',
+        'DueDate',
+        'Subtotal',
+        'VATRate',
+        'VATAmount',
+        'TotalAmount',
+        'Status',
+        'IsActive',
+        'Notes',
+    ];
+
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class, 'InvoiceId', 'Id');
+    }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AutoController;
 use App\Http\Controllers\InstructeurController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,6 +61,19 @@ Route::middleware('auth')->group(function () {
         Route::get('/{lesson}/verwijderen', [DrivingLessonController::class, 'destroy'])->name('destroy');
     });
 
+    //betaling crud
+    Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
+    Route::get('/payment/create', [PaymentController::class, 'create'])->name('payment.create');
+    Route::post('/payment', [PaymentController::class, 'store'])->name('payment.store');
+
+    // voor data verbegen
+    Route::post('/table-data/toggle', function () {
+        session()->put('hide_table_data', ! session('hide_table_data', false));
+        return back();
+    })->name('table-data.toggle');
+});
+
+Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
